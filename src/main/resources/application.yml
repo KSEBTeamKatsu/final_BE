@@ -1,0 +1,31 @@
+#server -> default 8080
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 30m   # 세션 타임아웃 (30분 예시)
+      cookie:
+        secure: false  # 로컬 개발환경(HTTP)용: Secure=false
+        same-site: Lax # 기본값
+
+# database link
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board_db?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: lhe
+    password: 1234
+  session:
+    store-type: redis  # 세션 저장소를 Redis로 설정
+    redis:
+      host: localhost    # Redis 서버 호스트
+      port: 6379         # Redis 서버 포트
+
+
+# debug
+logging:
+  level:
+    root: debug
+#    org.mybatis: debug
+#    org.springframework.web: debug
+#    org.springframework.jdbc: debug
