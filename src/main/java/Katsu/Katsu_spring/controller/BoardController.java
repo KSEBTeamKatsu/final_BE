@@ -12,7 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -69,16 +71,26 @@ public class BoardController {
 
     // 좋아요 증가
     @PostMapping("/posts/{postId}/like")
-    public ResponseEntity<Void> likePost(@PathVariable Long postId) {
+    public ResponseEntity<BoardDTO> likePost(@PathVariable Long postId) {
         boardService.incrementLikes(postId);
-        return ResponseEntity.ok().build();
+
+        BoardDTO updatedPost = boardService.findById(postId);
+
+        return ResponseEntity.ok(updatedPost);
     }
 
     // 좋아요 감소
     @PostMapping("/posts/{postId}/unlike")
-    public ResponseEntity<Void> unlikePost(@PathVariable Long postId) {
+    public ResponseEntity<Map<String, Object>> unlikePost(@PathVariable Long postId) {
         boardService.decrementLikes(postId);
-        return ResponseEntity.ok().build();
+
+        // 좋아요 수를 응답 JSON으로 반환
+        int updatedLikes = boardService.findById(postId).getLikes();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("likes", updatedLikes);
+
+        return ResponseEntity.ok(response);
     }
 
 }
