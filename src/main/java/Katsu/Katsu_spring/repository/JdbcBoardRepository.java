@@ -79,4 +79,16 @@ public class JdbcBoardRepository implements BoardRepository {
         String sql = "DELETE FROM board_table WHERE postId = ?";
         jdbcTemplate.update(sql, postId);
     }
+
+    @Override
+    public void incrementLikes(long postId) {
+        String sql = "UPDATE board_table SET likes = likes + 1 WHERE postId = ?";
+        jdbcTemplate.update(sql, postId);
+    }
+
+    @Override
+    public void decrementLikes(Long postId) {
+        String sql = "UPDATE board_table SET likes = likes - 1 WHERE postId = ?";
+        jdbcTemplate.update(sql, postId);
+    }
 }

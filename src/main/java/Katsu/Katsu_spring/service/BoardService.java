@@ -35,4 +35,8 @@ public class BoardService {
     public void delete(long postId){
         boardRepository.delete(postId);
     }
+
+    public void incrementLikes(long postId) { boardRepository.incrementLikes(postId); }
+
+    public void decrementLikes(long postId) { boardRepository.decrementLikes(postId); }
 }

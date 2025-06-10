@@ -21,4 +21,8 @@ public interface BoardRepository {
     void update(BoardDTO boardDTO);
 
     void delete(long postId);
+
+    void incrementLikes(long postId);
+
+    void decrementLikes(Long postId);
 }

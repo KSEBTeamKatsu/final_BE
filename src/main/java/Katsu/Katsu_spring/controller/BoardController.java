@@ -67,4 +67,18 @@ public class BoardController {
         boardService.delete(postId);
     }
 
+    // 좋아요 증가
+    @PostMapping("/posts/{postId}/like")
+    public ResponseEntity<Void> likePost(@PathVariable Long postId) {
+        boardService.incrementLikes(postId);
+        return ResponseEntity.ok().build();
+    }
+
+    // 좋아요 감소
+    @PostMapping("/posts/{postId}/unlike")
+    public ResponseEntity<Void> unlikePost(@PathVariable Long postId) {
+        boardService.decrementLikes(postId);
+        return ResponseEntity.ok().build();
+    }
+
 }
