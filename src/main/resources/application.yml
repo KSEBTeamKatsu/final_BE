@@ -15,6 +15,9 @@ spring:
     url: jdbc:mysql://localhost:3306/board_db?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: lhe
     password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
   session:
     store-type: redis  # 세션 저장소를 Redis로 설정
     redis:
